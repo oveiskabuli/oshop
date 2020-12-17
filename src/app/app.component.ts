@@ -17,7 +17,8 @@ export class AppComponent {
     this.auth.user$.subscribe((user) => {
       if (user) {
         this.userService.save(user);
-        const returnUrl = localStorage.getItem('returnUrl');
+        // tslint:disable-next-line: no-non-null-assertion
+        const returnUrl = localStorage.getItem('returnUrl')!;
         this.router.navigateByUrl(returnUrl);
       }
     });
