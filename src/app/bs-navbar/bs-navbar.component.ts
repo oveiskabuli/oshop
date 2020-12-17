@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import * as firebase from 'firebase';
-import { Observable } from 'rxjs';
+import { AuthService } from '../auth.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -10,16 +8,11 @@ import { Observable } from 'rxjs';
   styleUrls: ['./bs-navbar.component.scss'],
 })
 export class BsNavbarComponent implements OnInit {
-  user$: Observable<firebase.default.User | null>;
-
-  constructor(private afAuth: AngularFireAuth) {
-    this.user$ = afAuth.authState;
-  }
+  constructor(public auth: AuthService) {}
 
   ngOnInit(): void {}
 
-  // tslint:disable-next-line: typedef
   logout() {
-    this.afAuth.signOut();
+    this.auth.logOut();
   }
 }
