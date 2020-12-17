@@ -23,7 +23,7 @@
         </li>
       </ng-template>
       <li
-        *ngIf="auth.user$ | async as user; else anonymousUser"
+        *ngIf="appUser; else anonymousUser"
         ngbDropdown
         class="nav-item dropdown"
       >
@@ -34,18 +34,23 @@
           data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="false"
-          >{{ user.displayName }}</a
+          >{{ appUser.name }}</a
         >
         <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
           <a ngbDropdownItem class="dropdown-item" routerLink="/my/orders"
             >My Orders</a
           >
-          <a ngbDropdownItem class="dropdown-item" routerLink="/admin/orders"
-            >Manage Orders</a
-          >
-          <a ngbDropdownItem class="dropdown-item" routerLink="/admin/products"
-            >Manage Products</a
-          >
+          <ng-container *ngIf="appUser.isAdmin">
+            <a ngbDropdownItem class="dropdown-item" routerLink="/admin/orders"
+              >Manage Orders</a
+            >
+            <a
+              ngbDropdownItem
+              class="dropdown-item"
+              routerLink="/admin/products"
+              >Manage Products</a
+            >
+          </ng-container>
           <a ngbDropdownItem class="dropdown-item" (click)="logout()">Logout</a>
         </div>
       </li>
