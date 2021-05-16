@@ -23,6 +23,11 @@ import { AuthService } from './auth.service';
 import { AuthGuard } from './auth-guard.service';
 import { UserService } from './user.service';
 import { AdminAuthGaurd } from './admin-auth-gaurd.service';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { CategoryService } from './category.service';
+import { FormsModule } from '@angular/forms';
+import { ProductService } from './product.service';
+import { CustomFormsModule } from 'ng2-validation';
 
 @NgModule({
   declarations: [
@@ -37,9 +42,12 @@ import { AdminAuthGaurd } from './admin-auth-gaurd.service';
     AdminProductsComponent,
     AdminOrdersComponent,
     LoginComponent,
+    ProductFormComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    CustomFormsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -47,7 +55,14 @@ import { AdminAuthGaurd } from './admin-auth-gaurd.service';
     AngularFireStorageModule,
     NgbModule,
   ],
-  providers: [AuthService, AuthGuard, UserService, AdminAuthGaurd],
+  providers: [
+    AuthService,
+    AuthGuard,
+    UserService,
+    AdminAuthGaurd,
+    CategoryService,
+    ProductService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
